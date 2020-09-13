@@ -4,7 +4,7 @@
 
 ## База данных используется локальная - библиотека json-server. Для ее запуска требуется команда yarn json-server
 
-## стек: React + Redux
+## стек: React + Redux (+redux-thunk)
 
 ![Иллюстрация к проекту - главная](https://puu.sh/Gsg45/7336f8ded2.png)
 ![Иллюстрация к проекту - корзина](https://puu.sh/Gsg3A/203b9aea15.png)
