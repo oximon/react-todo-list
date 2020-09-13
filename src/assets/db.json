@@ -1,0 +1,139 @@
+{
+  "colors": [
+    {
+      "id": 1,
+      "hex": "#c9d1d3",
+      "name": "grey"
+    },
+    {
+      "id": 2,
+      "hex": "#42b883",
+      "name": "green"
+    },
+    {
+      "id": 3,
+      "hex": "#64c4ed",
+      "name": "blue"
+    },
+    {
+      "id": 4,
+      "hex": "#ffbbcc",
+      "name": "pink"
+    },
+    {
+      "id": 5,
+      "hex": "#b6e6bd",
+      "name": "lime"
+    },
+    {
+      "id": 6,
+      "hex": "#c355f5",
+      "name": "purple"
+    },
+    {
+      "id": 7,
+      "hex": "#110133",
+      "name": "black"
+    },
+    {
+      "id": 8,
+      "hex": "#ff6464",
+      "name": "red"
+    }
+  ],
+  "lists": [
+    {
+      "name": "Покупки",
+      "colorId": 2,
+      "id": 1
+    },
+    {
+      "name": "Фронтенд",
+      "colorId": 3,
+      "id": 2
+    },
+    {
+      "name": "Фильмы и сериалы",
+      "colorId": 4,
+      "id": 3
+    },
+    {
+      "name": "Книги",
+      "colorId": 5,
+      "id": 4
+    }
+  ],
+  "tasks": [
+    {
+      "listId": 1,
+      "text": "Макарошки",
+      "id": 1
+    },
+    {
+      "listId": 1,
+      "text": "Картошка",
+      "id": 2,
+      "completed": false
+    },
+    {
+      "listId": 1,
+      "text": "Биткоины",
+      "id": 3,
+      "completed": true
+    },
+    {
+      "listId": 2,
+      "text": "Изучить JavaScript",
+      "id": 4,
+      "completed": true
+    },
+    {
+      "listId": 2,
+      "text": "Изучить паттерны программирования",
+      "id": 5,
+      "completed": true
+    },
+    {
+      "listId": 2,
+      "text": "ReactJS",
+      "id": 6,
+      "completed": true
+    },
+    {
+      "listId": 2,
+      "text": "Redux",
+      "id": 7,
+      "completed": true
+    },
+    {
+      "listId": 3,
+      "text": "Макарошки",
+      "id": 8
+    },
+    {
+      "listId": 3,
+      "text": "Картошка",
+      "id": 9
+    },
+    {
+      "listId": 3,
+      "text": "Биткоины",
+      "id": 10
+    },
+    {
+      "listId": 4,
+      "text": "Макарошки",
+      "id": 11
+    },
+    {
+      "listId": 4,
+      "text": "Картошка",
+      "id": 12
+    },
+    {
+      "listId": 4,
+      "text": "Биткоины",
+      "id": 13
+    }
+  ]
+}
