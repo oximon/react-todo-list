@@ -4,26 +4,55 @@ import { patchList } from '../redux/actions/list';
 import { postTask } from '../redux/actions/task';
 import TaskItem from './TaskItem';
 
-const TaskList = ({ tasks, children, listId, color, active }) => {
-  const [popupState, setPopupState] = useState(false);
-  const [inputHandler, setInputHandler] = useState('');
+interface ITaskList {
+  tasks: Array<{
+    listId: number;
+    text: string;
+    id: number;
+    completed: boolean;
+    date: string;
+  }>;
+  children: string;
+  listId: number;
+  color: Array<{
+    id: number;
+    hex: string;
+    name: string;
+  }>;
+  active: boolean;
+}
+
+const TaskList: React.FC<ITaskList> = ({
+  tasks,
+  children,
+  listId,
+  color,
+  active,
+}) => {
+  const [popupState, setPopupState] = useState<boolean>(false);
+  const [inputTaskHandler, setInputTaskHandler] = useState<string>('');
+  const [inputDateHandler, setInputDateHandler] = useState<string>('');
 
   const dispatch = useDispatch();
 
-  function inputHandlerFunc(event) {
-    setInputHandler(event.target.value);
+  function inputTaskHandlerFunc(event: React.ChangeEvent<HTMLInputElement>) {
+    setInputTaskHandler(event.target.value);
+  }
+  function inputDateHandlerFunc(event: React.ChangeEvent<HTMLInputElement>) {
+    setInputDateHandler(event.target.value);
   }
 
-  function addTaskFunc(id, text) {
+  function addTaskFunc(id: number, text: string, date: string): void {
     if (text.trim() === '') {
       alert('Введите название задачи');
     } else {
-      postTask(dispatch, id, text);
-      setInputHandler('');
-      setPopupState(null);
+      postTask(dispatch, id, text, date);
+      setInputTaskHandler('');
+      setInputDateHandler('');
+      setPopupState(false);
     }
   }
-  function editListFunc(text, id) {
+  function editListFunc(text: any, id: number): void {
     patchList(dispatch, text, id);
   }
 
@@ -31,7 +60,10 @@ const TaskList = ({ tasks, children, listId, color, active }) => {
     <div className='todo__task'>
       <h1
         onClick={() =>
-          editListFunc(prompt('Введите название', children) || children, listId)
+          editListFunc(
+            window.prompt('Введите название', children) || children,
+            listId
+          )
         }
         className={`todo__tasks-title todo__tasks-title-${
           color[0] !== undefined && color[0].name
@@ -51,8 +83,8 @@ const TaskList = ({ tasks, children, listId, color, active }) => {
       </h1>
       <ul className='todo__tasks-list'>
         {tasks &&
-          tasks.map(({ text, completed, id }, index) => (
-            <TaskItem completed={completed} typeItem='task' id={id} key={index}>
+          tasks.map(({ text, completed, id, date }, index) => (
+            <TaskItem date={date} completed={completed} id={id} key={index}>
               {text}
             </TaskItem>
           ))}
@@ -90,15 +122,27 @@ const TaskList = ({ tasks, children, listId, color, active }) => {
         name='new-task'
         className={`new-task ${popupState ? 'new-task_open' : ''}`}>
         <input
-          value={inputHandler}
-          onChange={inputHandlerFunc.bind(this)}
+          value={inputTaskHandler}
+          onChange={inputTaskHandlerFunc.bind(this)}
           className='input input__new-task'
           type='text'
           placeholder='Текст задачи'
         />
+        <input
+          value={inputDateHandler}
+          onChange={inputDateHandlerFunc.bind(this)}
+          className='input input__new-task'
+          type='text'
+          placeholder='Срок выполнения'
+        />
         <div className='new-task__button-container'>
           <div
-            onClick={addTaskFunc.bind(this, listId, inputHandler)}
+            onClick={addTaskFunc.bind(
+              this,
+              listId,
+              inputTaskHandler,
+              inputDateHandler
+            )}
             className='btn btn__add'>
             Добавить задачу
           </div>

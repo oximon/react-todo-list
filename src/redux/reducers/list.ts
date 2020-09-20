@@ -1,10 +1,10 @@
-import { ADD_LIST, DELETE_LIST, EDIT_LIST, PLUS_LIST } from '../actionTypes';
+import { ADD_LIST, DELETE_LIST, EDIT_LIST, PLUS_LIST, ListState, ListActionTypes } from '../actionTypes';
 
-const initialState = {
+const initialState: ListState  = {
   lists: [],
 };
 
-const listReducer = (state = initialState, action) => {
+const listReducer = (state = initialState, action: ListActionTypes): ListState => {
   switch (action.type) {
     case ADD_LIST: {
       return {
@@ -42,7 +42,7 @@ const listReducer = (state = initialState, action) => {
     case DELETE_LIST: {
       return {
         ...state,
-        lists: state.lists.filter((list) => list.id !== action.payload),
+        lists: state.lists.filter((list) => list.id !== action.payload.id),
       };
     }
     default:

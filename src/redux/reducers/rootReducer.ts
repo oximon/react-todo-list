@@ -4,10 +4,10 @@ import colorReducer from './color';
 import listReducer from './list';
 import taskReducer from './task';
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   color: colorReducer,
   list: listReducer,
   task: taskReducer,
 });
 
-export default rootReducer;
+export type RootState = ReturnType<typeof rootReducer>;

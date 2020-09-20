@@ -50,7 +50,9 @@
     {
       "name": "Фронтенд",
       "colorId": 3,
-      "id": 2
+      "id": 2,
+      "text": "Картошка",
+      "date": "20.09.202023"
     },
     {
       "name": "Фильмы и сериалы",
@@ -60,80 +62,58 @@
     {
       "name": "Книги",
       "colorId": 5,
-      "id": 4
+      "id": 4,
+      "text": "Изучить JavaScript"
     }
   ],
   "tasks": [
     {
       "listId": 1,
-      "text": "Макарошки",
-      "id": 1
-    },
-    {
-      "listId": 1,
       "text": "Картошка",
       "id": 2,
-      "completed": false
-    },
-    {
-      "listId": 1,
-      "text": "Биткоины",
-      "id": 3,
-      "completed": true
+      "completed": true,
+      "date": "20.09.2020"
     },
     {
       "listId": 2,
       "text": "Изучить JavaScript",
       "id": 4,
-      "completed": true
+      "completed": true,
+      "date": "20.09.2020"
     },
     {
       "listId": 2,
       "text": "Изучить паттерны программирования",
       "id": 5,
-      "completed": true
+      "completed": true,
+      "date": "20.09.2020"
     },
     {
       "listId": 2,
       "text": "ReactJS",
       "id": 6,
-      "completed": true
+      "completed": true,
+      "date": "20.09.2020"
     },
     {
       "listId": 2,
       "text": "Redux",
       "id": 7,
-      "completed": true
+      "completed": true,
+      "date": "20.09.2020"
     },
     {
-      "listId": 3,
-      "text": "Макарошки",
-      "id": 8
-    },
-    {
-      "listId": 3,
-      "text": "Картошка",
-      "id": 9
-    },
-    {
-      "listId": 3,
-      "text": "Биткоины",
+      "listId": 4,
+      "text": "Александр Дюма",
+      "date": "Граф Монте-Кристо",
       "id": 10
     },
     {
-      "listId": 4,
-      "text": "Макарошки",
-      "id": 11
-    },
-    {
-      "listId": 4,
-      "text": "Картошка",
-      "id": 12
-    },
-    {
-      "listId": 4,
-      "text": "Биткоины",
-      "id": 13
+      "listId": 1,
+      "text": "Биткоин",
+      "date": "2030г",
+      "id": 11,
+      "completed": true
     }
   ]
 }

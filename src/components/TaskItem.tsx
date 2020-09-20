@@ -1,14 +1,40 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { fetchDeleteTask, patchCompleteTask } from '../redux/actions/task';
+import {
+  fetchDeleteTask,
+  patchCompleteTask,
+  patchDate,
+  patchTask,
+} from '../redux/actions/task';
 
-const TaskItem = ({ children, completed, id }) => {
-	const dispatch = useDispatch();
+interface ITaskItem {
+  children: string;
+  completed: boolean;
+  id: number;
+  date: string;
+}
+
+const TaskItem: React.FC<ITaskItem> = ({ children, completed, id, date }) => {
+  const dispatch = useDispatch();
+
+  function deleteTaskFunc(id: number): void {
+    if (global.confirm('Вы уверены, что хотите удалить категорию?')) {
+      console.log(id);
+      fetchDeleteTask(dispatch, id);
+    }
+  }
+
+  function editTaskFunc(text: any, id: number): void {
+    patchTask(dispatch, text, id);
+  }
+
+  function editDateFunc(date: any, id: number): void {
+    patchDate(dispatch, date, id);
+  }
   return (
-    <li
-      onClick={() => patchCompleteTask(dispatch, id, completed)}
-      className='todo__list-item'>
+    <li className='todo__list-item'>
       <div
+        onClick={() => patchCompleteTask(dispatch, id, completed)}
         className={`btn btn__complete ${
           completed ? 'btn__complete_done' : 'btn__complete'
         }`}>
@@ -27,9 +53,24 @@ const TaskItem = ({ children, completed, id }) => {
           />
         </svg>
       </div>
-      <p>{children}</p>
+      <p
+        onClick={() =>
+          editTaskFunc(
+            window.prompt('Введите название', children) || children,
+            id
+          )
+        }>
+        ID-{id}, {children}
+      </p>
+      <p
+        onClick={() =>
+          editDateFunc(window.prompt('Введите название', date) || date, id)
+        }
+        className='todo__list-item-date'>
+        {date}
+      </p>
       <svg
-        onClick={() => fetchDeleteTask(dispatch, id)}
+        onClick={() => deleteTaskFunc(id)}
         width='10'
         height='10'
         viewBox='0 0 10 10'

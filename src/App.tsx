@@ -1,24 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import CategoryItem from './components/CategoryItem';
 import TaskList from './components/TaskList';
-
 import { useDispatch, useSelector } from 'react-redux';
+
 import { fetchList, postList } from './redux/actions/list';
 import { fetchTask } from './redux/actions/task';
 import { fetchColor } from './redux/actions/color';
 
+import { Color, List, Task } from './redux/actionTypes';
+import { RootState } from './redux/reducers/rootReducer';
+
 import './app.scss';
 
-function App() {
-  const [popupState, setPopupState] = useState(false);
-  const [activeColor, setActiveColor] = useState(1);
-  const [inputValue, setInputValue] = useState('');
-  const [activeCategory, setActiveCategory] = useState(0);
+const App: React.FC = () => {
+  const [popupState, setPopupState] = useState<boolean>(false);
+  const [activeColor, setActiveColor] = useState<number>(1);
+  const [inputValue, setInputValue] = useState<string>('');
+  const [activeCategory, setActiveCategory] = useState<number>(0);
+  const [searchInput, setSearchInput] = useState<string>('');
 
   const dispatch = useDispatch();
-  const lists = useSelector((state) => state.list.lists);
-  const tasks = useSelector((state) => state.task.tasks);
-  const colors = useSelector((state) => state.color.colors);
+  const lists: List[] = useSelector((state: RootState) => state.list.lists);
+  const tasks = useSelector((state: RootState) => state.task.tasks);
+  const colors: Color[] = useSelector((state: RootState) => state.color.colors);
 
   useEffect(() => {
     dispatch(fetchList);
@@ -26,11 +30,11 @@ function App() {
     dispatch(fetchColor);
   }, [dispatch]);
 
-  function handleChange(event) {
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setInputValue(event.target.value);
   }
 
-  function addListFunc(text, colorId) {
+  function addListFunc(text: string, colorId: number): void {
     if (text.trim() === '') {
       alert('Введите название папки');
     } else {
@@ -41,7 +45,7 @@ function App() {
     }
   }
 
-  function renderTaskList(lists, active) {
+  function renderTaskList(lists: List[], active: boolean): any {
     return lists.map((list) => {
       return (
         <TaskList
@@ -49,7 +53,11 @@ function App() {
           color={colors.filter((color) => color.id === list.colorId)}
           key={list.id}
           listId={list.id}
-          tasks={tasks.filter((task) => task.listId === list.id)}>
+          tasks={tasks.filter(
+            (task: Task) =>
+              task.listId === list.id &&
+              task.text.toLowerCase().includes(searchInput.toLowerCase())
+          )}>
           {list.name}
         </TaskList>
       );
@@ -87,12 +95,12 @@ function App() {
             lists.map(({ name, colorId, id }, index) => {
               return (
                 <CategoryItem
-                  active={id === activeCategory}
+                  activeCat={id === activeCategory}
                   setActiveCategoryFunc={() => setActiveCategory(id)}
                   color={colors.filter((color) => color.id === colorId)}
-									key={index}
-									id={id}
-                  categoryLength={tasks.reduce((number, task) => {
+                  key={index}
+                  id={id}
+                  categoryLength={tasks.reduce((number: number, task: Task) => {
                     task.listId === id && number++;
                     return number;
                   }, 0)}>
@@ -175,6 +183,12 @@ function App() {
       </div>
 
       <div className='todo__tasks'>
+        <input
+          onChange={(e) => setSearchInput(e.target.value)}
+          type='text'
+          className='todo__input'
+          placeholder='Поиск...'
+        />
         {lists.length > 0 ? (
           activeCategory === 0 ? (
             renderTaskList(lists, false)
@@ -190,6 +204,6 @@ function App() {
       </div>
     </div>
   );
-}
+};
 
 export default App;

@@ -2,19 +2,38 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchDeleteList } from '../redux/actions/list';
 
-const ListItem = ({
+interface IListItem {
+  children: string;
+  color: Array<{
+    id: number;
+    hex: string;
+    name: string;
+  }>;
+  categoryLength: number;
+  activeCat: boolean;
+  id: number;
+  setActiveCategoryFunc(id: number): void;
+}
+
+const ListItem: React.FC<IListItem> = ({
   children,
   color,
   categoryLength,
-  active,
+  activeCat,
   id,
   setActiveCategoryFunc,
 }) => {
   const dispatch = useDispatch();
+
+  function deleteList(id: number): void {
+    if (global.confirm('Вы уверены, что хотите удалить категорию?')) {
+      fetchDeleteList(dispatch, id);
+    }
+  }
   return (
     <li
       onClick={setActiveCategoryFunc.bind(this, id)}
-      className={`todo__list-item ${active ? 'todo__list-item_active' : ''}`}>
+      className={`todo__list-item ${activeCat ? 'todo__list-item_active' : ''}`}>
       <div
         className={`todo__circle todo__circle-${
           color[0] !== undefined && color[0].name
@@ -24,7 +43,7 @@ const ListItem = ({
         <span> ({categoryLength})</span>
       </p>
       <svg
-        onClick={() => fetchDeleteList(dispatch, id)}
+        onClick={deleteList.bind(this, id)}
         width='10'
         height='10'
         viewBox='0 0 10 10'

@@ -13,10 +13,20 @@ body {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	width: 750px;
-	height: 530px;
+	width: 1000px;
+	height: 780px;
 	box-shadow: 0px 0px 15px #b9b9b9;
 	border-radius: 6px;
+
+	&__input {
+		border: none;
+		margin-bottom: 25px;
+		font-size: 18px;
+		outline: none;
+		border-bottom: 1px solid #f2f2f2;
+		padding-bottom: 10px;
+		width: 100%;
+	}
 
 	&__empty {
 		text-align: center;
@@ -67,8 +77,8 @@ body {
 	}
 
 	&__list {
-		width: 240px;
-		height: 530px;
+		width: 340px;
+		height: 780px;
 		background-color: #f4f6f8;
 		position: absolute;
 		border-radius: 5px 0 0 5px;
@@ -98,12 +108,17 @@ body {
 		&-item {
 			height: 37px;
 			border-radius: 7px;
-			padding: 10px 12px;
+			padding: 20px 12px;
 			list-style: none;
 			font-size: 20px;
 			display: flex;
 			align-items: center;
 			cursor: pointer;
+
+			&-date {
+				text-align: right;
+				padding-right: 25px;
+			}
 
 			&_active {
 				box-shadow: 0px 0px 15px #b9b9b9;
@@ -145,9 +160,9 @@ body {
 	&__tasks {
 		background-color: rgb(255, 255, 255);
 		position: absolute;
-		left: 240px;
-		width: 510px;
-		height: 530px;
+		left: 340px;
+		width: 660px;
+		height: 780px;
 		border-radius: 0 5px 5px 0;
 		padding: 56px;
 		overflow-y: scroll;
